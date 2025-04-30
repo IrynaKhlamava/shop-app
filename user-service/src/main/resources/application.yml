@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${USER_DB_HOST}:${USER_DB_PORT}/${USER_DB_NAME}
+    username: ${USER_DB_USER}
+    password: ${USER_DB_PASSWORD}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_DDL_AUTO}
+    show-sql: ${SPRING_JPA_SHOW_SQL}
+    properties:
+      hibernate:
+        format_sql: ${SPRING_JPA_FORMAT_SQL}
+    database-platform: ${SPRING_JPA_DIALECT}
+
+kafka:
+  bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+  consumer:
+    group-id: user-service-group
+  topics:
+    user-created: auth.user.created
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+order:
+  service:
+    url: ${ORDER_SERVICE_URL:http://order-service:8080}
+    user-orders-path: /api/orders/{userId}/history

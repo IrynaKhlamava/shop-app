@@ -1,0 +1,53 @@
+server:
+  address: 0.0.0.0
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${AUTH_DB_HOST}:${AUTH_DB_PORT}/${AUTH_DB_NAME}
+    username: ${AUTH_DB_USER}
+    password: ${AUTH_DB_PASSWORD}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER:org.postgresql.Driver}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_DDL_AUTO:update}
+    show-sql: ${SPRING_JPA_SHOW_SQL:true}
+    properties:
+      hibernate:
+        format_sql: ${SPRING_JPA_FORMAT_SQL:true}
+    database-platform: ${SPRING_JPA_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
+
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST}
+      port: ${SPRING_REDIS_PORT}
+      password: ${SPRING_REDIS_PASSWORD}
+
+jwt:
+  secret: ${JWT_SECRET}
+  access:
+    expiration: ${JWT_ACCESS_EXPIRATION:600000}
+  refresh:
+    expiration: ${JWT_REFRESH_EXPIRATION:604800000}
+
+google:
+  clientId: ${GOOGLE_CLIENT_ID}
+
+security:
+  public-paths:
+    - /api/auth/login
+    - /api/auth/register
+    - /api/auth/refresh
+    - /api/auth/google
+
+logging:
+  level:
+    org.springframework.data.redis: DEBUG
+
+kafka:
+  bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+  topics:
+    user-created: ${KAFKA_TOPIC_USER_CREATED}
+    partitions: ${KAFKA_TOPIC_PARTITIONS}
+    replicas: ${KAFKA_TOPIC_REPLICAS}

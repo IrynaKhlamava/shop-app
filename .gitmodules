@@ -1,0 +1,9 @@
+[submodule "api-gateway"]
+	path = api-gateway
+	url = https://github.com/IrynaKhlamava/api-gateway.git
+[submodule "order-service"]
+	path = order-service
+	url = https://github.com/IrynaKhlamava/order-service.git
+[submodule "product-service"]
+	path = product-service
+	url = https://github.com/IrynaKhlamava/product-service.git
