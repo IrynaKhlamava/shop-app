@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: order-service
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+  datasource:
+    url: jdbc:postgresql://${ORDER_DB_HOST}:${ORDER_DB_PORT}/${ORDER_DB_NAME}
+    username: ${ORDER_DB_USER}
+    password: ${ORDER_DB_PASSWORD}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER:org.postgresql.Driver}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_DDL_AUTO:update}
+    show-sql: ${SPRING_JPA_SHOW_SQL:true}
+    properties:
+      hibernate:
+        format_sql: ${SPRING_JPA_FORMAT_SQL:true}
+    database-platform: ${SPRING_JPA_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
+
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST}
+      port: ${SPRING_REDIS_PORT}
+      password: ${SPRING_REDIS_PASSWORD}
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+
+kafka:
+  bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+  consumer:
+    group-id: ${KAFKA_CONSUMER_GROUP_ID:order-service-group}
+  topics:
+    order-stock-update: ${KAFKA_TOPIC_ORDER_STOCK_UPDATE:order-stock-update}
+    order-stock-restore: ${KAFKA_TOPIC_ORDER_STOCK_RESTORE:order-stock-restore}
+
+product:
+  service-url: ${PRODUCT_SERVICE_URL:http://product-service:8080}
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG

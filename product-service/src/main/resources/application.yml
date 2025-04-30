@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: product-service
+
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI}
+
+kafka:
+  bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+  consumer:
+    group-id: ${KAFKA_CONSUMER_GROUP_ID:product-service-group}
+  topics:
+    order-stock-update: ${KAFKA_TOPIC_ORDER_STOCK_UPDATE}
+    order-stock-restore: ${KAFKA_TOPIC_ORDER_STOCK_RESTORE}
