@@ -193,4 +193,13 @@ public class AuthService {
             logger.error("Failed to publish user created event for user {}", userId, e);
         }
     }
+
+    public boolean isTokenBlacklisted(String token) {
+        String extracted = extractToken(token);
+        if (!jwtService.validateToken(extracted)) {
+            throw new CustomException(AppMessages.INVALID_TOKEN, HttpStatus.UNAUTHORIZED);
+        }
+        return redisTokenService.isTokenBlacklisted(extracted);
+    }
+
 }
