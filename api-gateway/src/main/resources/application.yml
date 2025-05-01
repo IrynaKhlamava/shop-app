@@ -34,6 +34,10 @@ spring:
         jwt:
           secret-key: ${JWT_SECRET}
 
+auth-service:
+  url: http://auth-service:8080
+  blacklist-check-path: /api/auth/blacklist/check
+
 logging:
   level:
     org.springframework.security: DEBUG

@@ -40,6 +40,7 @@ security:
     - /api/auth/register
     - /api/auth/refresh
     - /api/auth/google
+    - /api/auth/blacklist/check
 
 logging:
   level:

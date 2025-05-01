@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,5 +50,10 @@ public class AuthController {
         return ResponseEntity.ok(authService.googleLogin(request));
     }
 
+    @GetMapping("/blacklist/check")
+    public ResponseEntity<Boolean> isBlacklisted(@RequestParam("token") String token) {
+        boolean result = authService.isTokenBlacklisted(token);
+        return ResponseEntity.ok(result);
+    }
 
 }
